@@ -153,7 +153,7 @@ Template.Example.helpers({
       icon = "fa fa-question";
     }
     var finished = Tasks.Statuses.get(this.status, "finished");
-    var className = Tasks.Statuses.get(this.status, "finished") ? 'success' : 'default';
+    var className = finished ? 'success' : 'default';
     return '<span class="label label-' + className + '">' +
       '<i class="' + icon '"></i> ' + label +
       '</span>';
@@ -161,5 +161,13 @@ Template.Example.helpers({
 });
 ```
 
+## TODO / Roadmap
+
+- [x] Construct support for full nodes, simple `[value, ...]` lists, and `{value: lable, ...}` lists
+- [x] Object helper methods: `keys(), values(), labels()`
+- [x] Object helper methods: `get(), value(), label()`
+- [x] Fully tested
+- [x] README w/ real world usage examples
+- [ ] Meteor ui helper (maybe as extra optional package) `{{SEnum status Tasks.Statuses}}`
 
 

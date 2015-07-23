@@ -28,16 +28,15 @@ Package.describe({
   name: "zeroasterisk:s-enum",
   summary: "Super Enum Factory",
   version: "1.0.0",
+  git: "https://github.com/zeroasterisk/meteor-super-enums"
 });
 
 Package.onUse(function(api) {
   api.versionsFrom('1.0.2.1');
   api.use(['meteor', 'underscore'], ['client', 'server']);
-  //api.imply("dart:dart-base");
   api.export('SEnum', ['client', 'server']);
   api.addFiles('super_enum.js', ['client', 'server']);
 });
-
 
 Package.onTest(function(api) {
   api.use("zeroasterisk:s-enum");
