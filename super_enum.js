@@ -132,11 +132,8 @@ SEnum = function(list) {
     if (typeof node.value === "string" || typeof node.value === "number") {
       obj[node.value] = obj.nodes[index];
     }
-    console.log('list iterator end:', node);
 
   });
-
-  console.log(obj);
 
   return obj;
 };

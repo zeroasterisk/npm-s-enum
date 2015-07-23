@@ -27,7 +27,7 @@
 Package.describe({
   name: "zeroasterisk:s-enum",
   summary: "Super Enum Factory",
-  version: "1.0.0",
+  version: "1.0.1",
   git: "https://github.com/zeroasterisk/meteor-super-enums"
 });
 
