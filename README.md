@@ -32,7 +32,7 @@ meteor add zeroasterisk:s-enum
  * if you don't provide one, we use key
 
 
-## Usage Example: Days of the Week
+## Usage Example: Days of the Week (basics)
 
 First you create your enum object... this can happen anywhere
 
@@ -51,8 +51,22 @@ var Days = SEnum([
 Days.values() === [0, 1, 2, 3, 4, 5, 6];
 Days.keys() === ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 Days.labels() === ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+Days.options() === {0: "Sunday", 1: "Monday", 2: "Tuesday", 3: "Wednesday", 4: "Thursday", 5: "Friday", 6: "Saturday"};
+
+// and via aliases on the value
+Days.0.label === "Sunday";
+Days.0.key === "sunday";
+Days.0.value === 0;
+
+// and via aliases on the key
+Days.sunday.label === "Sunday"
+Days.sunday.key === "sunday"
+Days.sunday.value === 0;
 
 // and use a get() to return any specific field, from value or key
+Days.get("sunday", "value") === 0;
+Days.get(0, "label") === "Sunday";
+Days.get("not-found", "value", "defaultValue") === "defaultValue";
 ```
 
 ## Usage Example: Status
@@ -69,14 +83,29 @@ Tasks.Statuses = SEnum([
   { key: "completed", value: 31, label: "All Done Yo",
     icon: "fa fa-check-square", finished:  true }
 ]);
+
+// NOTE in additiion to the basics above, you can get to any field configured
+
+Tasks.Statuses.get("submitted", "icon") === "fa fa-check";
+Tasks.Statuses.get(1, "icon") === "fa fa-check";
+Tasks.Statuses.get(31, "finished") === true;
+Tasks.Statuses.get(1, "finished") === undefined;
+Tasks.Statuses.get(1, "finished", "defaultValue") === "defaultValue";
+
+// and via aliases on the value
+Tasks.Statuses.1.icon === "fa fa-check";
+Tasks.Statuses.submitted.icon === "fa fa-check";
 ```
+
+#### Integrating into Meteor
+
 You can setup a transform, translating all `keys` & `labels` into `values`
 
 ``` js
-  // allow all values
-  allowedValues: Tasks.Statuses.values(),
-  // allow all values AND all keys [1, 2, 31, "submitted", "accepted", "completed"]
-  allowedValues: Tasks.Statuses.values().concat(Tasks.Statuses.keys()),
+// allow all values
+allowedValues: Tasks.Statuses.values(),
+// or allow all values AND all keys [1, 2, 31, "submitted", "accepted", "completed"]
+allowedValues: Tasks.Statuses.values().concat(Tasks.Statuses.keys()),
 ```
 
 If you want to, you can setup a
@@ -103,23 +132,23 @@ a valid, `value`; if not it unsets... (you could choose not to unset, and
 instead get validation errors based on `allowedValues`).
 
 ``` js
-  status: {
-    type: Number,
-    optional: true,
-    autoValue: function() {
-      var autoFormField = this.field("status");
-      if (!autoFormField.isSet) {
-        this.unset();
-        return;
-      }
-      var status = Tasks.Statuses.value(autoFormField.value);
-      if (typeof status === "undefined") {
-        this.unset();
-        return;
-      }
-      return status;
+status: {
+  type: Number,
+  optional: true,
+  autoValue: function() {
+    var autoFormField = this.field("status");
+    if (!autoFormField.isSet) {
+      this.unset();
+      return;
     }
+    var status = Tasks.Statuses.value(autoFormField.value);
+    if (typeof status === "undefined") {
+      this.unset();
+      return;
+    }
+    return status;
   }
+}
 ```
 
 And for any template, you can easily translate

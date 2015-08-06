@@ -80,6 +80,7 @@ SEnum = function(list) {
     keys: function() {   return _.pluck(this.nodes, 'key'); },
     values: function() { return _.pluck(this.nodes, 'value'); },
     labels: function() { return _.pluck(this.nodes, 'label'); },
+    options: function() { return _.object(this.values(), this.labels()); },
     // raw list of nodes
     nodes: []
   };

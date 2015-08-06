@@ -131,6 +131,14 @@ Tinytest.add("SEnum - labels", function(test) {
   );
 });
 
+Tinytest.add("SEnum - options", function(test) {
+  test.equal(
+    Statuses.options(),
+    {1: "Submitted", 2: "Accepted", 31: "All Done Yo"},
+    "Statuses.options()"
+  );
+});
+
 Tinytest.add("SEnum - get", function(test) {
   // get label by value and key
   test.equal(
