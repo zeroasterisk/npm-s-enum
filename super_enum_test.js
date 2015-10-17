@@ -232,6 +232,21 @@ Tinytest.add("SEnum - get", function(test) {
     "Monday",
     "Days: get label for value=1"
   );
+  test.equal(
+    Days.get("Sunday", "label"),
+    "Sunday",
+    "Days: get label for label=Sunday"
+  );
+  test.equal(
+    Days.get("sunday", "label"),
+    "Sunday",
+    "Days: get label for key=sunday"
+  );
+  test.equal(
+    Days.get(0, "label"),
+    "Sunday",
+    "Days: get label for value=0"
+  );
 
   // DaysAbbr
   test.equal(

@@ -32,7 +32,12 @@ function camelize(str) {
 
 // get method for SEnum result
 var _get = function(selector, field, defaultValue) {
-  if (!selector) {
+  if (
+    // falsy
+    (!selector && selector!==0) ||
+    // not string & not number
+    (!_.isString(selector) && !_.isNumber(selector))
+  ) {
     return defaultValue;
   }
   var node = _.findWhere(this, {value: selector});
