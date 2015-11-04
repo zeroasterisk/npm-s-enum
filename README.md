@@ -30,6 +30,8 @@ meteor add zeroasterisk:s-enum
    from `0`
 * `label` should be a **human readable string**
  * if you don't provide one, we use key
+* `nodes` the internal array of all added items.
+ * Each node has at least a `key`, a `value`, and a `label` and can have any other properties.
 
 
 ## Usage Example: Days of the Week (basics)
@@ -67,6 +69,9 @@ Days.sunday.value === 0;
 Days.get("sunday", "value") === 0;
 Days.get(0, "label") === "Sunday";
 Days.get("not-found", "value", "defaultValue") === "defaultValue";
+
+// or you have access to the full list of all internal "nodes"
+_.pluck(_.filter(Days.nodes, function(node){ return node.value % 2 == 0; }), 'label') === [Sunday, Tuesday, Thursday, Saturday]
 ```
 
 ## Usage Example: Status
@@ -95,6 +100,9 @@ Tasks.Statuses.get(1, "finished", "defaultValue") === "defaultValue";
 // and via aliases on the value
 Tasks.Statuses.1.icon === "fa fa-check";
 Tasks.Statuses.submitted.icon === "fa fa-check";
+
+// or you have access to the full list of all internal "nodes"
+_.pluck(_.filter(Tasks.Statuses.nodes, function(node){ return node.value % 2 == 0; }), 'label') === ["Accepted"]
 ```
 
 #### Integrating into Meteor
@@ -198,5 +206,7 @@ Template.Example.helpers({
 - [x] Fully tested
 - [x] README w/ real world usage examples
 - [ ] Meteor ui helper (maybe as extra optional package) `{{SEnum status Tasks.Statuses}}`
+- [ ] split to non Meteor npm package format
+- [ ] maybe remove requirement of underscorejs??
 
 
