@@ -1,4 +1,8 @@
 
+## 1.1.3 package build fixes
+
+* version bump
+
 ## 1.1.2 package build fixes
 
 * Changed babel plugins, rollup preset was causing funky issue:

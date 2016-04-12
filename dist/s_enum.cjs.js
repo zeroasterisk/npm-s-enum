@@ -6,30 +6,33 @@ Object.defineProperty(exports, "__esModule", {
 
 var _zipObject2 = require('lodash/zipObject');
 
-var _zipObject3 = babelHelpers.interopRequireDefault(_zipObject2);
+var _zipObject3 = _interopRequireDefault(_zipObject2);
 
 var _map2 = require('lodash/map');
 
-var _map3 = babelHelpers.interopRequireDefault(_map2);
+var _map3 = _interopRequireDefault(_map2);
 
 var _result2 = require('lodash/result');
 
-var _result3 = babelHelpers.interopRequireDefault(_result2);
+var _result3 = _interopRequireDefault(_result2);
 
 var _has2 = require('lodash/has');
 
-var _has3 = babelHelpers.interopRequireDefault(_has2);
+var _has3 = _interopRequireDefault(_has2);
 
 var _find2 = require('lodash/find');
 
-var _find3 = babelHelpers.interopRequireDefault(_find2);
+var _find3 = _interopRequireDefault(_find2);
 
 var _each2 = require('lodash/each');
 
-var _each3 = babelHelpers.interopRequireDefault(_each2);
+var _each3 = _interopRequireDefault(_each2);
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 exports.default = SEnum;
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // ensure that autoValue is > than all node values
 var _getAutoValue = function _getAutoValue(obj, list) {
@@ -155,7 +158,7 @@ function SEnum(list) {
       // number = value
       node = { value: node, label: key };
     }
-    if ((typeof node === 'undefined' ? 'undefined' : babelHelpers.typeof(node)) !== 'object') {
+    if ((typeof node === 'undefined' ? 'undefined' : _typeof(node)) !== 'object') {
       // skip...
       return;
     }
