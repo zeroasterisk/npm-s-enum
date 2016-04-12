@@ -5,11 +5,11 @@
  * @license MIT
  */
 
-//jest.unmock('../dist/super_enum.cjs.js');
-jest.unmock('../super_enum.js');
+//jest.unmock('../dist/s_enum.cjs.js');
+jest.unmock('../s_enum.js');
 
 import _ from 'underscore';
-import SEnum from '../super_enum';
+import SEnum from '../s_enum';
 
 describe('SEnum Test', function() {
 

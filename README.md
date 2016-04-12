@@ -1,4 +1,4 @@
-# Super Enums Factory: `SEnum(list)`
+# Super Enum Factory: `SEnum(list)`
 
 Enums are great, for reducing a list of values, keys, labels, etc
 

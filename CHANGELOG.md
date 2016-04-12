@@ -1,6 +1,12 @@
 
 
-## 1.1.0 released as a npm package
+## 1.1.0 checkup package name and documentation a little more before release
+
+* Officially named to npm `s-enum`
+* Changed github repo path to match
+* Changed filenames to match
+
+## 1.1.0-rc1 released as a npm package
 
 * Meteor v1.3 now supports npm packages directly, (I've been meaning to anyway)
 * Test suite now `jest` - test in `jasmine`

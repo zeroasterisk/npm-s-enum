@@ -1,9 +1,9 @@
 {
-  "name": "super-enums",
+  "name": "s-enum",
   "version": "1.1.0",
-  "description": "Super Enum Factory",
-  "main": "dist/super_enum.cjs.js",
-  "jsnext:main": "dist/super_enum.es2015.js",
+  "description": "SEnum = Super Enum Factory",
+  "main": "dist/s_enum.cjs.js",
+  "jsnext:main": "dist/s_enum.es2015.js",
   "scripts": {
     "build": "build",
     "test": "jest"
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zeroasterisk/npm-super-enums.git"
+    "url": "git+https://github.com/zeroasterisk/npm-s-enum.git"
   },
   "keywords": [
     "enum",
@@ -24,9 +24,9 @@
   "author": "Alan Blount <alan@zeroasterisk.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zeroasterisk/npm-super-enums/issues"
+    "url": "https://github.com/zeroasterisk/npm-s-enum/issues"
   },
-  "homepage": "https://github.com/zeroasterisk/npm-super-enums#readme",
+  "homepage": "https://github.com/zeroasterisk/npm-s-enum#readme",
   "devDependencies": {
     "babel-jest": "^10.0.2",
     "babel-plugin-lodash": "^2.2.2",
