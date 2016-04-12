@@ -9,7 +9,7 @@ Enums are great, for reducing a list of values, keys, labels, etc
 > http://stackoverflow.com/a/4709224/194105
 
 You end up with `values` which are smaller, so less goes into your database, and
-less "over the wire" via DDP.
+less "over the wire", from server to client and back.
 
 The translation from `values` to `labels` is all in very small application code,
 cached on the client.
@@ -17,7 +17,7 @@ cached on the client.
 ## Install
 
 ```
-meteor add zeroasterisk:s-enum
+npm install --save s-enum
 ```
 
 ## Terms
@@ -72,7 +72,8 @@ Days.get("not-found", "value", "defaultValue") === "defaultValue";
 ## Usage Example: Status
 
 First you create your enum object... this can happen anywhere, but in this
-example we are going to think about attaching this to a Collection Object.
+example we are going to think about attaching this to an Object
+(a data model / Collection object).
 
 ``` js
 Tasks.Statuses = SEnum([
@@ -97,9 +98,16 @@ Tasks.Statuses.1.icon === "fa fa-check";
 Tasks.Statuses.submitted.icon === "fa fa-check";
 ```
 
-#### Integrating into Meteor
+#### Integrating into Meteor (optional)
 
-You can setup a transform, translating all `keys` & `labels` into `values`
+When this was originally written, it was for a [MeteorJS](https://meteor.com) application.
+The following logic is how you can automatically translate/transform inputs
+into SEnum values before writing to the database.  You can also validate to
+only allow these values.
+
+If you want, you can setup a
+[simple-schema](https://github.com/aldeed/meteor-simple-schema/)
+to only allow values from the SEnum.
 
 ``` js
 // allow all values
@@ -107,6 +115,8 @@ allowedValues: Tasks.Statuses.values(),
 // or allow all values AND all keys [1, 2, 31, "submitted", "accepted", "completed"]
 allowedValues: Tasks.Statuses.values().concat(Tasks.Statuses.keys()),
 ```
+
+You can setup a transform, translating all `keys` & `labels` into `values`
 
 If you want to, you can setup a
 [Mongo.Collection transform](http://docs.meteor.com/#/full/mongo_collection)

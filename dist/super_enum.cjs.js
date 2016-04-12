@@ -1,4 +1,8 @@
-import _ from 'lodash';
+'use strict';
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var _ = _interopDefault(require('lodash'));
 
 // ensure that autoValue is > than all node values
 let _getAutoValue = (obj, list) => {
@@ -60,7 +64,7 @@ let _get = function(selector, field, defaultValue) {
   return _.result(node, field);
 };
 
-export default function SEnum(list) {
+function SEnum(list) {
 
   let obj = {
     // functions
@@ -133,3 +137,4 @@ export default function SEnum(list) {
   return obj;
 }
 
+module.exports = SEnum;

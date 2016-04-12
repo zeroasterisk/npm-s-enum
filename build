@@ -1,0 +1,9 @@
+#!/bin/bash
+
+mkdir -p dist
+rm -f dist/*.js
+rollup --format es6 super_enum.js > dist/super_enum.es2015.js
+rollup --format amd super_enum.js > dist/super_enum.amd.js
+rollup --format cjs super_enum.js > dist/super_enum.cjs.js
+#rollup --format umd super_enum.js > dist/super_enum.umd.js
+

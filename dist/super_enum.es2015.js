@@ -60,7 +60,7 @@ let _get = function(selector, field, defaultValue) {
   return _.result(node, field);
 };
 
-export default function SEnum(list) {
+function SEnum(list) {
 
   let obj = {
     // functions
@@ -133,3 +133,4 @@ export default function SEnum(list) {
   return obj;
 }
 
+export default SEnum;
