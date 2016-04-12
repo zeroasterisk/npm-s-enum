@@ -1,4 +1,7 @@
 
+## 1.1.1 package build fixes
+
+* Swiched from rollup to direct babel translation for dist files
 
 ## 1.1.0 checkup package name and documentation a little more before release
 

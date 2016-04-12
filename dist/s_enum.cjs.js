@@ -1,54 +1,97 @@
 'use strict';
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-var _ = _interopDefault(require('lodash'));
+var _zipObject2 = require('lodash/zipObject');
+
+var _zipObject3 = babelHelpers.interopRequireDefault(_zipObject2);
+
+var _map2 = require('lodash/map');
+
+var _map3 = babelHelpers.interopRequireDefault(_map2);
+
+var _result2 = require('lodash/result');
+
+var _result3 = babelHelpers.interopRequireDefault(_result2);
+
+var _has2 = require('lodash/has');
+
+var _has3 = babelHelpers.interopRequireDefault(_has2);
+
+var _find2 = require('lodash/find');
+
+var _find3 = babelHelpers.interopRequireDefault(_find2);
+
+var _each2 = require('lodash/each');
+
+var _each3 = babelHelpers.interopRequireDefault(_each2);
+
+exports.default = SEnum;
+
 
 // ensure that autoValue is > than all node values
-let _getAutoValue = (obj, list) => {
-  let autoValue = 1,
-    updateAutoValue = function(node) {
-      if (typeof node.value !== 'number') {
-        return;
-      }
-      if (node.value > autoValue) {
-        autoValue = node.value + 1;
-      }
-    };
-  _.each(obj, updateAutoValue);
-  _.each(list, updateAutoValue);
+var _getAutoValue = function _getAutoValue(obj, list) {
+  var autoValue = 1,
+      updateAutoValue = function updateAutoValue(node) {
+    if (typeof node.value !== 'number') {
+      return;
+    }
+    if (node.value > autoValue) {
+      autoValue = node.value + 1;
+    }
+  };
+  (0, _each3.default)(obj, updateAutoValue);
+  (0, _each3.default)(list, updateAutoValue);
   return autoValue;
 };
 
 // ensure that a key is clean camelCase string
-let _stringToKey = (str) => {
-  return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
-    if (+match === 0) { return ''; }
+var _stringToKey = function _stringToKey(str) {
+  return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function (match, index) {
+    if (+match === 0) {
+      return '';
+    }
     return index === 0 ? match.toLowerCase() : match.toUpperCase();
   });
 };
 
 // get method for SEnum result
-let _get = function(selector, field, defaultValue) {
+var _get = function _get(selector, field, defaultValue) {
+  var _this = this;
+
   if (!selector) {
     return defaultValue;
   }
-  let node = _.find(this.nodes, (x) => { return x.value === selector;});
+  var node = (0, _find3.default)(this.nodes, function (x) {
+    return x.value === selector;
+  });
   if (!node) {
-    node = _.find(this.nodes, (x) => { return x.key === selector;});
+    node = (0, _find3.default)(this.nodes, function (x) {
+      return x.key === selector;
+    });
   }
   if (!node) {
-    node = _.find(this.nodes, (x) => { return x.label === selector;});
+    node = (0, _find3.default)(this.nodes, function (x) {
+      return x.label === selector;
+    });
   }
   if (!node) {
-    // numeric value, passed in as a string selector "31" -> 31
-    let selectorInt = parseInt(selector);
-    if (!isNaN(selectorInt)) {
-      node = _.find(this.nodes, (x) => { return x.value === selectorInt;});
-      if (!node) {
-        node = _.find(this.nodes, (x) => { return x.key === selectorInt;});
+    (function () {
+      // numeric value, passed in as a string selector "31" -> 31
+      var selectorInt = parseInt(selector);
+      if (!isNaN(selectorInt)) {
+        node = (0, _find3.default)(_this.nodes, function (x) {
+          return x.value === selectorInt;
+        });
+        if (!node) {
+          node = (0, _find3.default)(_this.nodes, function (x) {
+            return x.key === selectorInt;
+          });
+        }
       }
-    }
+    })();
   }
   if (!node) {
     return defaultValue;
@@ -57,28 +100,42 @@ let _get = function(selector, field, defaultValue) {
     // no field = return the whole node
     return node;
   }
-  if (!_.has(node, field)) {
+  if (!(0, _has3.default)(node, field)) {
     return defaultValue;
   }
   // return's the value for the field - if a function executes it
-  return _.result(node, field);
+  return (0, _result3.default)(node, field);
 };
 
 function SEnum(list) {
 
-  let obj = {
+  var obj = {
     // functions
     get: _get,
-    value: function(selector, defaultValue) {
+    value: function value(selector, defaultValue) {
       return this.get(selector, 'value', defaultValue);
     },
-    label: function(selector, defaultLabel) {
+    label: function label(selector, defaultLabel) {
       return this.get(selector, 'label', defaultLabel);
     },
-    keys: function() {   return _.map(this.nodes, (x) => { return x.key; }); },
-    values: function() { return _.map(this.nodes, (x) => { return x.value; }); },
-    labels: function() { return _.map(this.nodes, (x) => { return x.label; }); },
-    options: function() { return _.zipObject(this.values(), this.labels()); },
+    keys: function keys() {
+      return (0, _map3.default)(this.nodes, function (x) {
+        return x.key;
+      });
+    },
+    values: function values() {
+      return (0, _map3.default)(this.nodes, function (x) {
+        return x.value;
+      });
+    },
+    labels: function labels() {
+      return (0, _map3.default)(this.nodes, function (x) {
+        return x.label;
+      });
+    },
+    options: function options() {
+      return (0, _zipObject3.default)(this.values(), this.labels());
+    },
     // raw list of nodes
     nodes: []
   };
@@ -87,7 +144,7 @@ function SEnum(list) {
   obj.get = _get;
 
   // assign all values from list of inputs
-  _.each(list, function(node, key) {
+  (0, _each3.default)(list, function (node, key) {
 
     // ensure it is an object
     if (typeof node === 'string') {
@@ -98,7 +155,7 @@ function SEnum(list) {
       // number = value
       node = { value: node, label: key };
     }
-    if (typeof node !== 'object') {
+    if ((typeof node === 'undefined' ? 'undefined' : babelHelpers.typeof(node)) !== 'object') {
       // skip...
       return;
     }
@@ -123,7 +180,7 @@ function SEnum(list) {
     }
 
     // add node to list
-    let index = obj.nodes.length;
+    var index = obj.nodes.length;
     obj.nodes.push(node);
 
     // add shortcuts to node;
@@ -131,10 +188,8 @@ function SEnum(list) {
     if (typeof node.value === 'string' || typeof node.value === 'number') {
       obj[node.value] = obj.nodes[index];
     }
-
   });
 
   return obj;
 }
 
-module.exports = SEnum;
