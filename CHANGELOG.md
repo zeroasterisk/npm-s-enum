@@ -1,4 +1,9 @@
 
+## 1.1.2 package build fixes
+
+* Changed babel plugins, rollup preset was causing funky issue:
+  ReferenceError: babelHelpers is not defined
+
 ## 1.1.1 package build fixes
 
 * Swiched from rollup to direct babel translation for dist files
