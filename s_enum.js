@@ -26,7 +26,7 @@ let _stringToKey = (str) => {
 
 // get method for SEnum result
 let _get = function(selector, field, defaultValue) {
-  if (!selector) {
+  if (!selector && selector !== 0) {
     return defaultValue;
   }
   let node = _.find(this.nodes, (x) => { return x.value === selector;});
