@@ -25,27 +25,27 @@ let _stringToKey = (str) => {
 };
 
 // get method for SEnum result
+let _getNode = function(selector) {
+  let node = _.find(this.nodes, x => x.value === selector);
+  if (node) return node;
+  node = _.find(this.nodes, x => x.key === selector);
+  if (node) return node;
+  node = _.find(this.nodes, x => x.label === selector);
+  if (node) return node;
+  // numeric value, passed in as a string selector "31" -> 31
+  let selectorInt = parseInt(selector);
+  if (!isNaN(selectorInt)) {
+    node = _.find(this.nodes, x => x.value === selectorInt);
+    if (node) return node;
+    node = _.find(this.nodes, x => x.key === selectorInt);
+    if (node) return node;
+  }
+  return node; // undefined
+};
+
+// get method for SEnum result
 let _get = function(selector, field, defaultValue) {
-  if (!selector && selector !== 0) {
-    return defaultValue;
-  }
-  let node = _.find(this.nodes, (x) => { return x.value === selector;});
-  if (!node) {
-    node = _.find(this.nodes, (x) => { return x.key === selector;});
-  }
-  if (!node) {
-    node = _.find(this.nodes, (x) => { return x.label === selector;});
-  }
-  if (!node) {
-    // numeric value, passed in as a string selector "31" -> 31
-    let selectorInt = parseInt(selector);
-    if (!isNaN(selectorInt)) {
-      node = _.find(this.nodes, (x) => { return x.value === selectorInt;});
-      if (!node) {
-        node = _.find(this.nodes, (x) => { return x.key === selectorInt;});
-      }
-    }
-  }
+  const node = _getNode(selector);
   if (!node) {
     return defaultValue;
   }
