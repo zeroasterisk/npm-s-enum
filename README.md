@@ -56,9 +56,9 @@ Days.labels() === ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Frid
 Days.options() === {0: "Sunday", 1: "Monday", 2: "Tuesday", 3: "Wednesday", 4: "Thursday", 5: "Friday", 6: "Saturday"};
 
 // and via aliases on the value
-Days.0.label === "Sunday";
-Days.0.key === "sunday";
-Days.0.value === 0;
+Days[0].label === "Sunday";
+Days[0].key === "sunday";
+Days[0].value === 0;
 
 // and via aliases on the key
 Days.sunday.label === "Sunday"
@@ -98,7 +98,7 @@ Tasks.Statuses.get(1, "finished") === undefined;
 Tasks.Statuses.get(1, "finished", "defaultValue") === "defaultValue";
 
 // and via aliases on the value
-Tasks.Statuses.1.icon === "fa fa-check";
+Tasks.Statuses[1].icon === "fa fa-check";
 Tasks.Statuses.submitted.icon === "fa fa-check";
 
 // or you have access to the full list of all internal "nodes"
